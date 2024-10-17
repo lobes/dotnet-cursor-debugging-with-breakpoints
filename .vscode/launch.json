@@ -1,13 +1,12 @@
 {
   "version": "0.2.0",
   "configurations": [
-    // Important: Downloading netcoredbg and building it for your architecture is crucial, at least for me. Follow the instructions in README.
     {
       "name": "netcoredbg",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/bin/Debug/net8.0/dotnet-cursor-debugging-with-breakpoints.dll",
+      "program": "${workspaceFolder}/bin/Debug/net8.0/${workspaceFolderBasename}.dll",
       "args": [],
       "cwd": "${workspaceFolder}",
       "stopAtEntry": true,
@@ -15,11 +14,14 @@
       "internalConsoleOptions": "openOnSessionStart",
       "pipeTransport": {
         "pipeCwd": "${workspaceFolder}",
-
         "pipeProgram": "bash",
-        "pipeArgs": ["-c"],
-        "debuggerPath": "${HOME}/.local/netcoredbg",
-        "debuggerArgs": ["--interpreter=vscode"],
+        "pipeArgs": [
+          "-c"
+        ],
+        "debuggerPath": "${HOME}/.nix-profile/bin/netcoredbg",
+        "debuggerArgs": [
+          "--interpreter=vscode"
+        ],
         "quoteArgs": true
       },
       "env": {
@@ -31,12 +33,6 @@
           "protocolMessages": true
         }
       }
-    },
-    {
-      "name": ".NET Core Attach",
-      "type": "coreclr",
-      "request": "attach",
-      "processId": "${command:pickProcess}"
     }
   ]
 }
